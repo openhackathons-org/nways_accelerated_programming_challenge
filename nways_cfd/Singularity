@@ -1,0 +1,39 @@
+# Copyright (c) 2020 NVIDIA Corporation.  All rights reserved. 
+
+Bootstrap: docker
+FROM: nvcr.io/nvidia/nvhpc:23.5-devel-cuda_multi-ubuntu20.04
+
+%environment
+    export XDG_RUNTIME_DIR=
+    export PATH="/usr/local/bin:/opt/anaconda3/bin:/usr/bin:$PATH"
+
+%post
+    build_tmp=$(mktemp -d) && cd ${build_tmp}
+
+    apt-get -y update
+    apt-get -y dist-upgrade 
+    DEBIAN_FRONTEND=noninteractive apt-get -yq install --no-install-recommends \
+	    m4 vim-nox emacs-nox nano zip\
+    	python3-pip python3-setuptools git-core inotify-tools \
+	    curl git-lfs \
+	    build-essential libtbb-dev
+    rm -rf /var/lib/apt/cache/* 
+
+    pip3 install --upgrade pip
+    pip3 install jupyterlab
+    pip3 install ipywidgets
+    pip3 install gdown
+
+    apt-get update -y 
+
+    cd /
+    rm -rf ${build_tmp}
+
+%files
+    English/ /labs
+
+%runscript
+    "$@"
+
+%labels
+    AUTHOR bharatk
