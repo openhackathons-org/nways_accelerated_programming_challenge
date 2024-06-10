@@ -1,7 +1,12 @@
 # Copyright (c) 2020 NVIDIA Corporation.  All rights reserved. 
 
+# To build the singularity container, run: $  singularity build --fakeroot nways_c.simg nways_Singularity
+# To copy the content of the container: $ singularity run nways_c.simg cp -rT /labs ~/labs
+# To run: $ singularity run --nv nways_c.simg jupyter-lab --notebook-dir=~/labs
+# Finally, open http://localhost:8888/
+
 Bootstrap: docker
-FROM: nvcr.io/nvidia/nvhpc:23.5-devel-cuda_multi-ubuntu20.04
+FROM: nvcr.io/nvidia/nvhpc:24.1-devel-cuda_multi-ubuntu22.04
 
 %environment
     export XDG_RUNTIME_DIR=
@@ -36,4 +41,4 @@ FROM: nvcr.io/nvidia/nvhpc:23.5-devel-cuda_multi-ubuntu20.04
     "$@"
 
 %labels
-    AUTHOR bharatk
+    AUTHOR mozhgank

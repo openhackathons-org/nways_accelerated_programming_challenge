@@ -7,8 +7,13 @@
 # HINT 3) For the CUDA C version, make sure the SUFFIXES and CC are correct  
 
 CC=	nvc++
-CFLAGS=	-lm -I/opt/nvidia/hpc_sdk/Linux_x86_64/23.5/cuda/11.8/include -L/opt/nvidia/hpc_sdk/Linux_x86_64/23.5/cuda/11.8/lib64 -lnvToolsExt
+CFLAGS := -O3 -w -ldl
+ACCFLAGS := -Minfo=accel
+VER=$(shell nvc -dumpversion)
+NVARCH=$(shell uname -s)_$(shell uname -m)
+CFLAGS= -I/opt/nvidia/hpc_sdk/$(NVARCH)/$(VER)/cuda/include
 LFLAGS=
+
 
 
 # System independent definitions
@@ -41,14 +46,14 @@ SRC= \
 OBJ=	$(SRC:.cpp=.o)
 
 .cpp.o:
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< 
 
 all:	$(EXE)
 
 $(OBJ):	$(INC)
 
 $(EXE):	$(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LFLAGS) 
 
 $(OBJ):	$(MF)
 
