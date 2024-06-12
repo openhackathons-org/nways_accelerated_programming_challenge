@@ -25,6 +25,7 @@ FROM: nvcr.io/nvidia/nvhpc:24.1-devel-cuda_multi-ubuntu22.04
     rm -rf /var/lib/apt/cache/* 
 
     pip3 install --upgrade pip
+    pip3 install numpy
     pip3 install jupyterlab
     pip3 install ipywidgets
     pip3 install gdown

@@ -10,6 +10,7 @@ RUN apt-get -y update && \
         DEBIAN_FRONTEND=noninteractive apt-get -yq install --no-install-recommends python3-pip python3-setuptools nginx zip make build-essential libtbb-dev && \
         rm -rf /var/lib/apt/lists/* && \
         pip3 install --upgrade pip &&\
+        pip3 install numpy &&\
         pip3 install jupyterlab &&\
         pip3 install ipywidgets &&\
         pip3 install gdown

@@ -1,3 +1,6 @@
+# If you want to use this file to compare outputs, please put the output data in the correct locations. Otherwise, please compare the "error" value against the given slides.
+# Make sure to copy the "velocity.dat" and rename it to "orig_velocity".
+# To run: python3 compare.py
 
 import numpy as np
  
